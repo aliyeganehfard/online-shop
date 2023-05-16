@@ -8,4 +8,5 @@ class OnlineShopApplication
 
 fun main(args: Array<String>) {
 	SpringApplication.run(OnlineShopApplication::class.java, *args)
+
 }
