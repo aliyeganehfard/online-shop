@@ -1,6 +1,6 @@
-package ir.onlineshop.domein.repository
+package ir.onlineshop.database.repository
 
-import ir.onlineshop.domein.model.Shop
+import ir.onlineshop.database.model.Shop
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 

@@ -1,4 +1,4 @@
-package ir.onlineshop.domein.model
+package ir.onlineshop.database.model
 
 import jakarta.persistence.*
 

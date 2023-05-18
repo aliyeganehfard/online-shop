@@ -1,8 +1,9 @@
 package ir.onlineshop.controller
 
-import ir.onlineshop.common.ShopDto
-import ir.onlineshop.domein.model.Shop
+import ir.onlineshop.common.dto.ShopDto
+import ir.onlineshop.database.model.Shop
 import ir.onlineshop.service.ShopService
+import org.modelmapper.ModelMapper
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 
@@ -12,14 +13,19 @@ class ShopController @Autowired constructor(
     private val shopService: ShopService
 ) {
 
+    private val modelMapper: ModelMapper = ModelMapper()
+
     @PostMapping("save")
-    fun save(@RequestBody shop: Shop) : String{
+    fun save(@RequestBody shopDto: ShopDto): String? {
+        val shop = modelMapper.map(shopDto, Shop::class.java)
         shopService.save(shop)
-        return shop.toString()
+        return "ok"
     }
 
     @GetMapping("findAll")
-    fun findAll():List<Shop>{
-        return shopService.findAll()
+    fun findAll():List<ShopDto>{
+        return shopService.findAll().asSequence()
+            .map { modelMapper.map(it,ShopDto::class.java) }
+            .toList()
     }
 }
