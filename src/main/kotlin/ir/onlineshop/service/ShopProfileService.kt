@@ -8,7 +8,9 @@ interface ShopProfileService {
 
     fun save(shop: Shop, shopStatus: ShopStatus)
 
-    fun findShopsWithAwaitingConfigurationStatus(): List<ShopProfile>
+    fun findShopsWithAwaitingConfirmationsStatus(): List<ShopProfile>
+
+
 
     fun findByShopId(shopId: Long)
 }

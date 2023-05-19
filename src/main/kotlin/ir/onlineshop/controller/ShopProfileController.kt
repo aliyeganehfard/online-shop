@@ -18,9 +18,9 @@ class ShopProfileController @Autowired constructor(
 
     private val mapper = BaseModelMapper()
 
-    @GetMapping("findAwaitingConfigurations")
-    fun findAwaitingConfigurations() : ResponseEntity<List<ShopProfileDto>>{
-        val shopProfiles = shopProfileService.findShopsWithAwaitingConfigurationStatus()
+    @GetMapping("findAwaitingConfirmations")
+    fun findAwaitingConfirmations() : ResponseEntity<List<ShopProfileDto>>{
+        val shopProfiles = shopProfileService.findShopsWithAwaitingConfirmationsStatus()
         val shopProfilesDto = mapper.toDtoList(shopProfiles,ShopProfileDto::class.java)
         return ResponseEntity(shopProfilesDto,HttpStatus.OK)
     }

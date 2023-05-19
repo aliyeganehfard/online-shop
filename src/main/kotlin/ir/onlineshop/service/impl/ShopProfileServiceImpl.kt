@@ -29,7 +29,7 @@ class ShopProfileServiceImpl @Autowired constructor(
         shopProfileRepository.saveAll(shopProfileList)
     }
 
-    override fun findShopsWithAwaitingConfigurationStatus(): List<ShopProfile> {
+    override fun findShopsWithAwaitingConfirmationsStatus(): List<ShopProfile> {
        return findShopsByStatus(ShopStatus.AWAITING_CONFIRMATION)
     }
 
