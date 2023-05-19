@@ -29,6 +29,14 @@ class ShopProfileServiceImpl @Autowired constructor(
         shopProfileRepository.saveAll(shopProfileList)
     }
 
+    override fun findShopsWithAwaitingConfigurationStatus(): List<ShopProfile> {
+       return findShopsByStatus(ShopStatus.AWAITING_CONFIRMATION)
+    }
+
+    override fun findByShopId(shopId: Long) {
+        TODO("Not yet implemented")
+    }
+
     private fun disActiveShopProfile(shop :Shop): MutableList<ShopProfile> {
         val shopProfileList = getShopProfileByShopIdAndActiveStatus(shop,true)
         if (shopProfileList.isNotEmpty()) {
@@ -45,7 +53,6 @@ class ShopProfileServiceImpl @Autowired constructor(
     private fun getShopProfileByShopIdAndActiveStatus(shop: Shop, active: Boolean) =
         shopProfileRepository.findByShopIdAndActive(shop.id!!, active)
 
-    override fun findByShopId(shopId: Long) {
-        TODO("Not yet implemented")
-    }
+    private fun findShopsByStatus(shopStatus: ShopStatus) =
+        shopProfileRepository.findByStatus(shopStatus)
 }
