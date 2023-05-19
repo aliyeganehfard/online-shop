@@ -5,14 +5,17 @@ import ir.onlineshop.database.model.ShopProfile
 import ir.onlineshop.database.model.enums.ShopStatus
 import ir.onlineshop.database.repository.ShopProfileRepository
 import ir.onlineshop.service.ShopProfileService
+import ir.onlineshop.service.ShopService
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.context.annotation.Lazy
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.time.LocalDateTime
 
 @Service
 class ShopProfileServiceImpl @Autowired constructor(
-    private val shopProfileRepository: ShopProfileRepository
+    private val shopProfileRepository: ShopProfileRepository,
+    @Lazy private val shopService: ShopService
 ) : ShopProfileService {
 
     @Transactional
@@ -22,7 +25,7 @@ class ShopProfileServiceImpl @Autowired constructor(
 
         shopProfile.shop = shop
         shopProfile.status = shopStatus
-        shopProfile.active= true
+        shopProfile.active = true
         shopProfile.statusStartDate = LocalDateTime.now()
         shopProfileList.add(shopProfile)
 
@@ -30,15 +33,21 @@ class ShopProfileServiceImpl @Autowired constructor(
     }
 
     override fun findShopsWithAwaitingConfirmationsStatus(): List<ShopProfile> {
-       return findShopsByStatus(ShopStatus.AWAITING_CONFIRMATION)
+        return findActiveShopProfilesByShopStatus(ShopStatus.AWAITING_CONFIRMATION)
+    }
+
+    override fun confirmShopRequest(shopId: Long): Boolean {
+        val shop = shopService.findById(shopId)
+        this.save(shop, ShopStatus.NEW)
+        return true
     }
 
     override fun findByShopId(shopId: Long) {
         TODO("Not yet implemented")
     }
 
-    private fun disActiveShopProfile(shop :Shop): MutableList<ShopProfile> {
-        val shopProfileList = getShopProfileByShopIdAndActiveStatus(shop,true)
+    private fun disActiveShopProfile(shop: Shop): MutableList<ShopProfile> {
+        val shopProfileList = getShopProfileByShopIdAndActiveStatus(shop, true)
         if (shopProfileList.isNotEmpty()) {
             shopProfileList.asSequence().forEach { item ->
                 if (item.active) {
@@ -53,6 +62,6 @@ class ShopProfileServiceImpl @Autowired constructor(
     private fun getShopProfileByShopIdAndActiveStatus(shop: Shop, active: Boolean) =
         shopProfileRepository.findByShopIdAndActive(shop.id!!, active)
 
-    private fun findShopsByStatus(shopStatus: ShopStatus) =
-        shopProfileRepository.findByStatus(shopStatus)
+    private fun findActiveShopProfilesByShopStatus(shopStatus: ShopStatus) =
+        shopProfileRepository.findByStatusAndActive(shopStatus,true)
 }

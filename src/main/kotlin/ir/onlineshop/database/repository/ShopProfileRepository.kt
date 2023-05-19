@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository
 @Repository
 interface ShopProfileRepository: JpaRepository<ShopProfile,Long> {
 
-    fun findByShopIdAndActive(shopId: Long, Active: Boolean) : MutableList<ShopProfile>
+    fun findByShopIdAndActive(shopId: Long, active: Boolean) : MutableList<ShopProfile>
 
-    fun findByStatus(shopStatus: ShopStatus) : List<ShopProfile>
+    fun findByStatusAndActive(shopStatus: ShopStatus, active: Boolean) : List<ShopProfile>
 }

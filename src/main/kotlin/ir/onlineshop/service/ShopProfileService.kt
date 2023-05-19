@@ -10,7 +10,7 @@ interface ShopProfileService {
 
     fun findShopsWithAwaitingConfirmationsStatus(): List<ShopProfile>
 
-
+    fun confirmShopRequest(shopId: Long) : Boolean
 
     fun findByShopId(shopId: Long)
 }
