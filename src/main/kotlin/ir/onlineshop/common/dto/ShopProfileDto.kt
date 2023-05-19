@@ -6,7 +6,6 @@ import java.time.LocalDateTime
 data class ShopProfileDto(
 
     var statusStartDate: LocalDateTime? =null,
-    var statusEndDate: LocalDateTime? = null,
     var active: Boolean? =null,
     var status: ShopStatus? = null,
 
