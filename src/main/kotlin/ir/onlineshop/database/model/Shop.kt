@@ -1,7 +1,6 @@
 package ir.onlineshop.database.model
 
 import jakarta.persistence.*
-import lombok.ToString
 import org.hibernate.Hibernate
 import org.hibernate.annotations.DynamicInsert
 import org.hibernate.annotations.DynamicUpdate
