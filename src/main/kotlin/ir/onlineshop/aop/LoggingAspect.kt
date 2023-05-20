@@ -1,7 +1,6 @@
-package ir.onlineshop.common.aop
+package ir.onlineshop.aop
 
 import org.aspectj.lang.JoinPoint
-import org.aspectj.lang.annotation.After
 import org.aspectj.lang.annotation.Aspect
 import org.aspectj.lang.annotation.Before
 import org.slf4j.Logger
