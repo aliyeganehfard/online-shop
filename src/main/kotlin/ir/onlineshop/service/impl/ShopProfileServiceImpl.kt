@@ -42,6 +42,10 @@ class ShopProfileServiceImpl @Autowired constructor(
         return true
     }
 
+    override fun findAll(): List<ShopProfile> {
+        return shopProfileRepository.findAll()
+    }
+
     override fun findByShopId(shopId: Long) {
         TODO("Not yet implemented")
     }

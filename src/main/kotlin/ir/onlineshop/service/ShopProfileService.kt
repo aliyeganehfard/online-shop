@@ -12,5 +12,7 @@ interface ShopProfileService {
 
     fun confirmShopRequest(shopId: Long) : Boolean
 
+    fun findAll(): List<ShopProfile>
+
     fun findByShopId(shopId: Long)
 }

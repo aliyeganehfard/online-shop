@@ -28,4 +28,11 @@ class ShopProfileController @Autowired constructor(
         val isConfirmed = shopProfileService.confirmShopRequest(shopId)
         return ResponseEntity(isConfirmed, HttpStatus.OK)
     }
+
+    @GetMapping("findAll")
+    fun findAll(): ResponseEntity<List<ShopProfileDto>>{
+        val shopProfileList = shopProfileService.findAll()
+        val shopProfileDtoList = mapper.toDtoList(shopProfileList,ShopProfileDto::class.java)
+        return ResponseEntity(shopProfileDtoList,HttpStatus.OK)
+    }
 }
