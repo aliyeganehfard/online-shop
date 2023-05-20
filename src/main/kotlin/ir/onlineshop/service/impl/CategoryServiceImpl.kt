@@ -16,6 +16,10 @@ class CategoryServiceImpl @Autowired constructor(
         categoryRepository.save(category)
     }
 
+    override fun findAll(): List<Category> {
+        return categoryRepository.findAll()
+    }
+
     private fun findById(categorySaveDto: CategorySaveDto) {
         categoryRepository.findById(categorySaveDto.id!!)
     }

@@ -1,16 +1,15 @@
 package ir.onlineshop.controller
 
+import ir.onlineshop.common.dto.CategoryDto
 import ir.onlineshop.common.dto.CategorySaveDto
 import ir.onlineshop.common.dto.mapper.BaseModelMapper
 import ir.onlineshop.database.model.Category
 import ir.onlineshop.service.CategoryService
+import org.apache.tomcat.util.http.parser.HttpParser
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("category/")
@@ -27,5 +26,10 @@ class CategoryController @Autowired constructor(
         return ResponseEntity("ok",HttpStatus.CREATED)
     }
 
-
+    @GetMapping("findAll")
+    fun findAll(): ResponseEntity<List<Category>>{
+        val categoryList = categoryService.findAll()
+//        val categoryDtoList = mapper.toDtoList(categoryList,CategoryDto::class.java)
+        return ResponseEntity(categoryList,HttpStatus.OK)
+    }
 }

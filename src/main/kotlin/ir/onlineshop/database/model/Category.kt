@@ -20,4 +20,8 @@ data class Category(
 
     @OneToMany(mappedBy = "parentCategory", cascade = [CascadeType.ALL], orphanRemoval = true)
     var childCategories: MutableList<Category> = mutableListOf()
-)
+
+
+) {
+
+}
