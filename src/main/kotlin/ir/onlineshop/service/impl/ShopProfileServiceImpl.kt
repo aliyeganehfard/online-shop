@@ -20,15 +20,14 @@ class ShopProfileServiceImpl @Autowired constructor(
 
     @Transactional
     override fun save(shop: Shop, shopStatus: ShopStatus) {
-        val shopProfile = ShopProfile()
         val shopProfileList = disActiveShopProfile(shop)
-
-        shopProfile.shop = shop
-        shopProfile.status = shopStatus
-        shopProfile.active = true
-        shopProfile.statusStartDate = LocalDateTime.now()
+        val shopProfile = ShopProfile().apply {
+            this.shop = shop
+            this.status = shopStatus
+            this.active = true
+            this.statusStartDate = LocalDateTime.now()
+        }
         shopProfileList.add(shopProfile)
-
         shopProfileRepository.saveAll(shopProfileList)
     }
 
@@ -67,5 +66,5 @@ class ShopProfileServiceImpl @Autowired constructor(
         shopProfileRepository.findByShopIdAndActive(shop.id!!, active)
 
     private fun findActiveShopProfilesByShopStatus(shopStatus: ShopStatus) =
-        shopProfileRepository.findByStatusAndActive(shopStatus,true)
+        shopProfileRepository.findByStatusAndActive(shopStatus, true)
 }

@@ -22,12 +22,12 @@ class ShopServiceImpl @Autowired constructor(
     @Transactional
     override fun save(shop: Shop): Shop {
         val savedShop = shopRepository.save(shop)
-        saveShopStatus(savedShop,ShopStatus.AWAITING_CONFIRMATION)
+        saveShopStatus(savedShop)
         return savedShop
     }
 
-    private fun saveShopStatus(shop: Shop , shopStatus: ShopStatus) {
-        shopProfileService.save(shop,shopStatus)
+    private fun saveShopStatus(shop: Shop) {
+        shopProfileService.save(shop,ShopStatus.AWAITING_CONFIRMATION)
     }
 
     override fun findAll(): List<Shop> {
