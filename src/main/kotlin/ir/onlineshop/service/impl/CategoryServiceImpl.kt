@@ -1,6 +1,5 @@
 package ir.onlineshop.service.impl
 
-import ir.onlineshop.common.dto.CategorySaveDto
 import ir.onlineshop.database.model.Category
 import ir.onlineshop.database.repository.CategoryRepository
 import ir.onlineshop.service.CategoryService
@@ -19,10 +18,5 @@ class CategoryServiceImpl @Autowired constructor(
     override fun findAll(): List<Category> {
         return categoryRepository.findAll()
     }
-
-    private fun findById(categorySaveDto: CategorySaveDto) {
-        categoryRepository.findById(categorySaveDto.id!!)
-    }
-
 
 }
