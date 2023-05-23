@@ -16,4 +16,8 @@ class ProductPropertiesServiceImpl @Autowired constructor(
     override fun saveAll(productProperties: List<ProductProperties>) {
     productPropertiesRepository.saveAll(productProperties)
     }
+
+    override fun findAllById(propertiesIds: List<Long?>?): MutableList<ProductProperties>? {
+        return propertiesIds?.let { productPropertiesRepository.findAllById(it) }
+    }
 }
