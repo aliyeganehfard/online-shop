@@ -10,7 +10,7 @@
     </parent>
     <groupId>ir</groupId>
     <artifactId>online-shop</artifactId>
-    <version>1.2.2</version>
+    <version>1.2.3</version>
     <name>online-shop</name>
     <description>Demo project for Spring Boot</description>
     <properties>

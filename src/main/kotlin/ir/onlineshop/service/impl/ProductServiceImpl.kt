@@ -27,6 +27,13 @@ class ProductServiceImpl @Autowired constructor(
         productRepository.save(product)
     }
 
+    override fun findShopProducts(shopId: Long): List<Product> {
+        val isExistShopById = shopService.existById(shopId)
+        if (!isExistShopById)
+            throw Exception()
+        return productRepository.findAllByShopId(shopId)
+    }
+
     private fun findPropertiesByIds(product: Product): List<Long?> {
         return product.properties.asSequence()
             .map { properties -> properties.id }
