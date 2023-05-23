@@ -19,7 +19,7 @@ open class BaseModelMapper{
         return modelMapper.map(dto, mClass)
     }
 
-    fun <M,D> toListOfModel(dtoList: List<D>, mClass: Class<M>): List<M> {
+    fun <M,D> toModelList(dtoList: List<D>, mClass: Class<M>): List<M> {
         return dtoList.asSequence()
             .map { modelMapper.map(it, mClass) }
             .toList()
