@@ -2,18 +2,14 @@ package ir.onlineshop.database.model
 
 import jakarta.persistence.*
 import org.hibernate.Hibernate
-import org.hibernate.annotations.DynamicInsert
-import org.hibernate.annotations.DynamicUpdate
 import java.time.LocalDateTime
 
 @Entity
-@Table(name = "SHOP")
-@DynamicInsert
-@DynamicUpdate
-data class Shop(
+@Table(name = "PRODUCT")
+data class Product(
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     var id: Long? = null,
 
@@ -26,14 +22,20 @@ data class Shop(
     @Column(name = "NAME", nullable = false)
     var name: String = "",
 
-    @Column(name = "LATIN_NAME", nullable = false)
-    var latinName: String = "",
+    @Column(name = "DESCRIPTION", nullable = false)
+    var description: String = "",
 
-    @Column(name = "ABOUT")
-    var about: String? = "",
+    @Column(name = "PRICE", nullable = false)
+    var price: Long = 0,
 
-    @Column(name = "ADDRESS")
-    var address: String? = null
+    @OneToMany(fetch = FetchType.EAGER, cascade = [CascadeType.ALL])
+    @JoinColumn(name = "PROPERTIES")
+    var properties: List<ProductProperties> = mutableListOf(),
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
+    @JoinColumn(name = "SHOP")
+    var shop: Shop? = null
+
 ) {
 
     @PrePersist
@@ -51,7 +53,7 @@ data class Shop(
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other == null || Hibernate.getClass(this) != Hibernate.getClass(other)) return false
-        other as Shop
+        other as Product
 
         return id != null && id == other.id
     }
@@ -60,7 +62,6 @@ data class Shop(
 
     @Override
     override fun toString(): String {
-        return this::class.simpleName + "(id = $id , createDate = $createDate , updateDate = $updateDate , name = $name , latinName = $latinName , about = $about , address = $address )"
+        return this::class.simpleName + "(id = $id , name = $name , description = $description )"
     }
-
 }

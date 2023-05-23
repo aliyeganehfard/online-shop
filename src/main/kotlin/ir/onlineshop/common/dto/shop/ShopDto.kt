@@ -1,4 +1,4 @@
-package ir.onlineshop.common.dto
+package ir.onlineshop.common.dto.shop
 
 import java.time.LocalDateTime
 

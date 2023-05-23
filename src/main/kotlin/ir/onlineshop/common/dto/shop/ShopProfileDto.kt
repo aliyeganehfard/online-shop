@@ -1,4 +1,4 @@
-package ir.onlineshop.common.dto
+package ir.onlineshop.common.dto.shop
 
 import com.fasterxml.jackson.annotation.JsonInclude
 import ir.onlineshop.database.model.enums.ShopStatus

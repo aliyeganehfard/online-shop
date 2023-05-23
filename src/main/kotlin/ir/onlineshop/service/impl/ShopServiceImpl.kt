@@ -37,4 +37,8 @@ class ShopServiceImpl @Autowired constructor(
     override fun findById(id: Long): Shop {
         return shopRepository.findById(id).orElseThrow { (Exception(id.toString())) }
     }
+
+    override fun existById(id: Long): Boolean {
+        return shopRepository.existsById(id)
+    }
 }

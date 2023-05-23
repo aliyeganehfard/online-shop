@@ -1,6 +1,6 @@
 package ir.onlineshop.controller
 
-import ir.onlineshop.common.dto.ShopProfileDto
+import ir.onlineshop.common.dto.shop.ShopProfileDto
 import ir.onlineshop.common.dto.mapper.BaseModelMapper
 import ir.onlineshop.service.ShopProfileService
 import org.springframework.beans.factory.annotation.Autowired
@@ -32,7 +32,7 @@ class ShopProfileController @Autowired constructor(
     @GetMapping("findAll")
     fun findAll(): ResponseEntity<List<ShopProfileDto>>{
         val shopProfileList = shopProfileService.findAll()
-        val shopProfileDtoList = mapper.toDtoList(shopProfileList,ShopProfileDto::class.java)
+        val shopProfileDtoList = mapper.toDtoList(shopProfileList, ShopProfileDto::class.java)
         return ResponseEntity(shopProfileDtoList,HttpStatus.OK)
     }
 }

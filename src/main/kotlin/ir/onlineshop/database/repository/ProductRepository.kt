@@ -1,11 +1,8 @@
 package ir.onlineshop.database.repository
 
-import ir.onlineshop.database.model.Shop
+import ir.onlineshop.database.model.Product
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 
 @Repository
-interface ShopRepository : JpaRepository<Shop, Long> {
-
-    override fun existsById(id: Long): Boolean
-}
+interface ProductRepository: JpaRepository<Product,Long>

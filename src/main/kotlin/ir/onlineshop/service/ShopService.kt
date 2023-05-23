@@ -9,4 +9,6 @@ interface ShopService {
     fun findAll(): List<Shop>
 
     fun findById(id: Long): Shop
+
+    fun existById(id: Long): Boolean
 }

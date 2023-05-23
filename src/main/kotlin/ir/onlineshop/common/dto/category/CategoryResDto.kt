@@ -1,6 +1,5 @@
 package ir.onlineshop.common.dto.category
 
-import com.fasterxml.jackson.annotation.JsonIdentityReference
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 
 data class CategoryResDto(

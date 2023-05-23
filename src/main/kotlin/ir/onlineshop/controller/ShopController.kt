@@ -1,6 +1,6 @@
 package ir.onlineshop.controller
 
-import ir.onlineshop.common.dto.ShopDto
+import ir.onlineshop.common.dto.shop.ShopDto
 import ir.onlineshop.common.dto.mapper.BaseModelMapper
 import ir.onlineshop.database.model.Shop
 import ir.onlineshop.service.ShopService
