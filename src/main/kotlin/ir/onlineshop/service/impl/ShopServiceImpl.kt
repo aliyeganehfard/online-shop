@@ -27,7 +27,7 @@ class ShopServiceImpl @Autowired constructor(
     }
 
     private fun saveShopStatus(shop: Shop) {
-        shopProfileService.save(shop,ShopStatus.AWAITING_CONFIRMATION)
+        shopProfileService.save(shop, ShopStatus.AWAITING_CONFIRMATION)
     }
 
     override fun findAll(): List<Shop> {
