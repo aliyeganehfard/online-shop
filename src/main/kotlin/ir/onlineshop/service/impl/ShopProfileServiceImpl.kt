@@ -45,8 +45,8 @@ class ShopProfileServiceImpl @Autowired constructor(
         return shopProfileRepository.findAll()
     }
 
-    override fun findByShopId(shopId: Long) {
-        TODO("Not yet implemented")
+    override fun findStatusByShopId(shopId: Long) : ShopStatus{
+       return shopProfileRepository.findStatusByShopId(shopId)
     }
 
     private fun disActiveShopProfile(shop: Shop): MutableList<ShopProfile> {

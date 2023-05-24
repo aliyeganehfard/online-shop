@@ -14,5 +14,5 @@ interface ShopProfileService {
 
     fun findAll(): List<ShopProfile>
 
-    fun findByShopId(shopId: Long)
+    fun findStatusByShopId(shopId: Long) : ShopStatus
 }
