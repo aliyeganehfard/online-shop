@@ -1,5 +1,6 @@
 package ir.onlineshop.controller
 
+import ir.onlineshop.common.dto.category.CategoryAddHolderDto
 import ir.onlineshop.common.dto.category.CategoryReqDto
 import ir.onlineshop.common.dto.category.CategoryResDto
 import ir.onlineshop.common.dto.mapper.BaseModelMapper
@@ -23,6 +24,12 @@ class CategoryController @Autowired constructor(
         val category = mapper.toModel(categoryReqDto, Category::class.java)
         categoryService.save(category)
         return ResponseEntity("ok", HttpStatus.CREATED)
+    }
+
+    @PostMapping("add/subCategory")
+    fun addCategory(@RequestBody req: CategoryAddHolderDto): ResponseEntity<String>{
+        categoryService.addCategory(req)
+        return ResponseEntity("ok",HttpStatus.CREATED)
     }
 
     @GetMapping("findAll")

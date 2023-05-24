@@ -1,5 +1,6 @@
 package ir.onlineshop.service.impl
 
+import ir.onlineshop.common.dto.category.CategoryAddHolderDto
 import ir.onlineshop.database.model.Category
 import ir.onlineshop.database.repository.CategoryRepository
 import ir.onlineshop.service.CategoryService
@@ -12,6 +13,15 @@ class CategoryServiceImpl @Autowired constructor(
 ) : CategoryService {
 
     override fun save(category: Category) {
+        categoryRepository.save(category)
+    }
+
+    override fun addCategory(categoryAddHolder: CategoryAddHolderDto) {
+        val parentCategory = findById(categoryAddHolder.parentId!!)
+        val category = Category().apply {
+            this.title = categoryAddHolder.title!!
+            this.parentCategory = parentCategory
+        }
         categoryRepository.save(category)
     }
 
