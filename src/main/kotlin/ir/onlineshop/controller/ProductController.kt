@@ -30,4 +30,11 @@ class ProductController @Autowired constructor(
         val productsDto = mapper.toDtoList(products, ProductResDto::class.java)
         return ResponseEntity(productsDto, HttpStatus.OK)
     }
+
+    @GetMapping("findAll")
+    fun findAll(): ResponseEntity<List<ProductResDto>>{
+        val products = productService.findAll()
+        val productsDto = mapper.toDtoList(products,ProductResDto::class.java)
+        return ResponseEntity(productsDto,HttpStatus.OK)
+    }
 }
