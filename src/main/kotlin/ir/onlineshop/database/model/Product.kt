@@ -33,8 +33,12 @@ data class Product(
     var properties: List<ProductProperties> = mutableListOf(),
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
-    @JoinColumn(name = "SHOP")
-    var shop: Shop? = null
+    @JoinColumn(name = "SHOP", nullable = false)
+    var shop: Shop? = null,
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
+    @JoinColumn(name ="CATEGORY", nullable = false)
+    var category: Category? = null
 
 ) {
 
