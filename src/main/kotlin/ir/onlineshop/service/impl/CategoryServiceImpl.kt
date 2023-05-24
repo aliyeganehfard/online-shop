@@ -19,4 +19,8 @@ class CategoryServiceImpl @Autowired constructor(
         return categoryRepository.findAll()
     }
 
+    override fun findById(categoryId: Long): Category {
+        return categoryRepository.findById(categoryId).orElseThrow { (Exception(categoryId.toString())) }
+    }
+
 }

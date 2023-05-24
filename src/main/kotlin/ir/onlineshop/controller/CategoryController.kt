@@ -31,4 +31,11 @@ class CategoryController @Autowired constructor(
         val categoryDtoList = mapper.toDtoList(categoryList, CategoryResDto::class.java)
         return ResponseEntity(categoryDtoList, HttpStatus.OK)
     }
+
+    @GetMapping("findById/{categoryId}")
+    fun findById(@PathVariable(name = "categoryId") categoryId: Long): ResponseEntity<CategoryResDto>{
+        val category = categoryService.findById(categoryId)
+        val categoryDto = mapper.toDto(category,CategoryResDto::class.java)
+        return ResponseEntity(categoryDto,HttpStatus.OK)
+    }
 }
