@@ -34,8 +34,17 @@ class CategoryServiceImpl @Autowired constructor(
         return categoryRepository.findById(categoryId).orElseThrow { (Exception(categoryId.toString())) }
     }
 
-    override fun findMainCategory(): List<MainCategory> {
-        return categoryRepository.findMainCategory()
+    override fun findMainCategories(): List<MainCategory> {
+        return categoryRepository.findMainCategories()
+    }
+
+    override fun findMainCategoryById(categoryId: Long): Category {
+        categoryRepository.findMainCategoryById(categoryId).let {
+            if (it == null)
+                throw Exception("main category with id = $categoryId not found! ")
+            else
+                return it
+        }
     }
 
 }

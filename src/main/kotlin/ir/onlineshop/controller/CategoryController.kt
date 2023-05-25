@@ -47,9 +47,9 @@ class CategoryController @Autowired constructor(
         return ResponseEntity(categoryDto, HttpStatus.OK)
     }
 
-    @GetMapping("findMainCategory")
-    fun findMainCategory(): ResponseEntity<List<MainCategoryDto>> {
-        val mainCategory = categoryService.findMainCategory()
+    @GetMapping("findMainCategories")
+    fun findMainCategories(): ResponseEntity<List<MainCategoryDto>> {
+        val mainCategory = categoryService.findMainCategories()
         val mainCategoryDto = mapper.toDtoList(mainCategory, MainCategoryDto::class.java)
         return ResponseEntity(mainCategoryDto, HttpStatus.OK)
     }

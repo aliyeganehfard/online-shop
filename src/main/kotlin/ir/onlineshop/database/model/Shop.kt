@@ -33,7 +33,11 @@ data class Shop(
     var about: String? = "",
 
     @Column(name = "ADDRESS")
-    var address: String? = null
+    var address: String? = null,
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category", nullable = false)
+    var category: Category? = null
 ) {
 
     @PrePersist

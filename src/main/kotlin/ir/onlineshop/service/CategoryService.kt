@@ -14,5 +14,8 @@ interface CategoryService {
 
     fun findById(categoryId: Long): Category
 
-    fun findMainCategory(): List<MainCategory>
+    fun findMainCategories(): List<MainCategory>
+
+    fun findMainCategoryById(categoryId: Long): Category
+
 }

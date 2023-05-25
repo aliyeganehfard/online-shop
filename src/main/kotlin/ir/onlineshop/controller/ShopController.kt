@@ -1,7 +1,8 @@
 package ir.onlineshop.controller
 
-import ir.onlineshop.common.dto.shop.ShopDto
+import ir.onlineshop.common.dto.shop.ShopResDto
 import ir.onlineshop.common.dto.mapper.BaseModelMapper
+import ir.onlineshop.common.dto.shop.ShopReqDto
 import ir.onlineshop.database.model.Shop
 import ir.onlineshop.service.ShopService
 import org.springframework.beans.factory.annotation.Autowired
@@ -17,23 +18,23 @@ class ShopController @Autowired constructor(
     private val mapper = BaseModelMapper()
 
     @PostMapping("save")
-    fun save(@RequestBody shopDto: ShopDto): ResponseEntity<String> {
-        val shop = mapper.toModel(shopDto, Shop::class.java)
+    fun save(@RequestBody reqDto: ShopReqDto): ResponseEntity<String> {
+        val shop = mapper.toModel(reqDto, Shop::class.java)
         shopService.save(shop)
         return ResponseEntity("ok", HttpStatus.CREATED)
     }
 
     @GetMapping("findAll")
-    fun findAll(): ResponseEntity<List<ShopDto>> {
+    fun findAll(): ResponseEntity<List<ShopResDto>> {
         val shops = shopService.findAll()
-        val shopDtoList = mapper.toDtoList(shops, ShopDto::class.java)
-        return ResponseEntity(shopDtoList, HttpStatus.OK)
+        val shopResDtoList = mapper.toDtoList(shops, ShopResDto::class.java)
+        return ResponseEntity(shopResDtoList, HttpStatus.OK)
     }
 
     @GetMapping("findById/{id}")
-    fun findById(@PathVariable(name = "id") id: Long): ResponseEntity<ShopDto> {
+    fun findById(@PathVariable(name = "id") id: Long): ResponseEntity<ShopResDto> {
         val shop = shopService.findById(id)
-        val shopDto = mapper.toDto(shop, ShopDto::class.java)
-        return ResponseEntity(shopDto, HttpStatus.OK)
+        val shopResDto = mapper.toDto(shop, ShopResDto::class.java)
+        return ResponseEntity(shopResDto, HttpStatus.OK)
     }
 }
