@@ -5,4 +5,6 @@ import ir.onlineshop.database.model.Comment
 interface CommentService {
 
     fun save(comment: Comment)
+
+    fun findAll(): List<Comment>
 }

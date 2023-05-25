@@ -23,7 +23,7 @@ data class Comment(
     @Column(name = "SCORE")
     var score: CommentScore? = null,
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "PRODUCT", nullable = false)
     var product: Product? = null
 ) {

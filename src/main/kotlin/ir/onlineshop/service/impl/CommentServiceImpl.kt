@@ -18,4 +18,8 @@ class CommentServiceImpl @Autowired constructor(
         comment.product = product
         commentRepository.save(comment)
     }
+
+    override fun findAll(): List<Comment> {
+        return commentRepository.findAll()
+    }
 }

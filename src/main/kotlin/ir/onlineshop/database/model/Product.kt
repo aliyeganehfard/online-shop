@@ -40,9 +40,8 @@ data class Product(
     @JoinColumn(name = "CATEGORY", nullable = false)
     var category: Category? = null,
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = [CascadeType.ALL])
-    @JoinColumn(name = "COMMENT")
-    var comment: List<Comment> = mutableListOf()
+    @OneToMany(mappedBy = "product", fetch = FetchType.EAGER, cascade = [CascadeType.ALL])
+    var comments: List<Comment> = mutableListOf()
 ) {
 
     @PrePersist
