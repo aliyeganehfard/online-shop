@@ -34,10 +34,18 @@ class ProductPropertiesController @Autowired constructor(
     }
 
     @PutMapping("update")
-    fun update(@RequestParam("propertiesId") propertiesId: Long,
-               @RequestParam("value") value: String): ResponseEntity<String>{
+    fun update(
+        @RequestParam("propertiesId") propertiesId: Long,
+        @RequestParam("value") value: String
+    ): ResponseEntity<String> {
         productPropertiesService.update(propertiesId, value)
-        return ResponseEntity("ok",HttpStatus.CREATED)
+        return ResponseEntity("ok", HttpStatus.CREATED)
+    }
+
+    @DeleteMapping("deleteById")
+    fun deleteById(@RequestParam("propertiesId") propertiesId: Long): ResponseEntity<String> {
+        productPropertiesService.deleteById(propertiesId)
+        return ResponseEntity("ok", HttpStatus.OK)
     }
 
     @GetMapping("findById/{propertiesId}")

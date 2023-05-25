@@ -10,6 +10,8 @@ interface ProductPropertiesService {
 
     fun update(propertiesId: Long, value: String)
 
+    fun deleteById(propertiesId: Long)
+
     fun findById(propertiesId: Long): ProductProperties
 
     fun findAllByIds(propertiesIds: List<Long?>?): MutableList<ProductProperties>?

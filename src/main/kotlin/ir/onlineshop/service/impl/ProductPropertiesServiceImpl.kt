@@ -35,8 +35,17 @@ class ProductPropertiesServiceImpl @Autowired constructor(
         productPropertiesRepository.save(properties)
     }
 
+    override fun deleteById(propertiesId: Long) {
+        existByPropertiesId(propertiesId).let {
+            if (!it)
+                throw Exception("properties id $propertiesId not found")
+        }
+        productPropertiesRepository.deleteById(propertiesId)
+    }
+
     override fun findById(propertiesId: Long): ProductProperties {
-        return productPropertiesRepository.findById(propertiesId).orElseThrow{ (throw Exception(propertiesId.toString())) }
+        return productPropertiesRepository.findById(propertiesId)
+            .orElseThrow { (throw Exception(propertiesId.toString())) }
     }
 
     override fun findAllByIds(propertiesIds: List<Long?>?): MutableList<ProductProperties>? {
@@ -48,5 +57,9 @@ class ProductPropertiesServiceImpl @Autowired constructor(
         if (!existsShopById)
             throw Exception()
         return productPropertiesRepository.findShopProperties(shopId)
+    }
+
+    private fun existByPropertiesId(propertiesId: Long): Boolean {
+        return productPropertiesRepository.existsById(propertiesId)
     }
 }
