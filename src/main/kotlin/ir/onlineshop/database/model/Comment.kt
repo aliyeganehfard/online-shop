@@ -20,6 +20,7 @@ data class Comment(
     @Column(name = "COMMENT_TEXT")
     var comment: String? = null,
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "SCORE")
     var score: CommentScore? = null,
 
