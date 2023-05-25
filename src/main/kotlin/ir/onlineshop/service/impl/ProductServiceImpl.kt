@@ -43,6 +43,10 @@ class ProductServiceImpl @Autowired constructor(
         return productRepository.findAll()
     }
 
+    override fun findById(productId: Long): Product {
+        return productRepository.findById(productId).orElseThrow{ (throw Exception(productId.toString())) }
+    }
+
     private fun findProductPropertiesByIds(product: Product): MutableList<ProductProperties>? {
         val propertiesIds: List<Long?> = product.properties.asSequence()
             .map { properties -> properties.id }

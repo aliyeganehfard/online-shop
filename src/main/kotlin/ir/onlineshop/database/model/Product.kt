@@ -26,7 +26,7 @@ data class Product(
     var description: String = "",
 
     @Column(name = "PRICE", nullable = false)
-    var price: Long = 0,
+    var price: Long? = null,
 
     @OneToMany(fetch = FetchType.EAGER, cascade = [CascadeType.ALL])
     @JoinColumn(name = "PROPERTIES")
@@ -37,9 +37,12 @@ data class Product(
     var shop: Shop? = null,
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
-    @JoinColumn(name ="CATEGORY", nullable = false)
-    var category: Category? = null
+    @JoinColumn(name = "CATEGORY", nullable = false)
+    var category: Category? = null,
 
+    @OneToMany(fetch = FetchType.EAGER, cascade = [CascadeType.ALL])
+    @JoinColumn(name = "COMMENT")
+    var comment: List<Comment> = mutableListOf()
 ) {
 
     @PrePersist

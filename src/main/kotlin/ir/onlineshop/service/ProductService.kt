@@ -9,4 +9,6 @@ interface ProductService {
     fun findShopProducts(shopId: Long): List<Product>
 
     fun findAll(): List<Product>
+
+    fun findById(productId: Long): Product
 }
