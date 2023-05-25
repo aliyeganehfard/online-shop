@@ -16,7 +16,11 @@ data class ProductProperties(
     var title: String = "",
 
     @Column(name = "PRODUCT_VALUE", nullable = false)
-    var value: String = ""
+    var value: String = "",
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "PRODUCT_ID")
+    var product: Product? = null
 
 ) {
 

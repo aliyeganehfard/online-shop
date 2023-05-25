@@ -51,7 +51,7 @@ class ProductServiceImpl @Autowired constructor(
         val propertiesIds: List<Long?> = product.properties.asSequence()
             .map { properties -> properties.id }
             .toList()
-        return productPropertiesService.findAllById(propertiesIds)
+        return productPropertiesService.findAllByIds(propertiesIds)
     }
 
     private fun findCategoryById(product: Product): Category {

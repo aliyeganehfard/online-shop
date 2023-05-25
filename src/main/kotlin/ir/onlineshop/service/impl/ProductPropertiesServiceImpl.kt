@@ -3,23 +3,32 @@ package ir.onlineshop.service.impl
 import ir.onlineshop.database.model.ProductProperties
 import ir.onlineshop.database.repository.ProductPropertiesRepository
 import ir.onlineshop.service.ProductPropertiesService
+import ir.onlineshop.service.ProductService
 import ir.onlineshop.service.ShopService
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.context.annotation.Lazy
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
 @Service
 class ProductPropertiesServiceImpl @Autowired constructor(
     val productPropertiesRepository: ProductPropertiesRepository,
-    val shopService: ShopService
+    val shopService: ShopService,
+    @Lazy val productService: ProductService,
 ) : ProductPropertiesService {
+
+    override fun save(productProperties: ProductProperties) {
+        val product = productService.findById(productProperties.product?.id!!)
+        productProperties.product = product
+        productPropertiesRepository.save(productProperties)
+    }
 
     @Transactional
     override fun saveAll(productProperties: List<ProductProperties>) {
         productPropertiesRepository.saveAll(productProperties)
     }
 
-    override fun findAllById(propertiesIds: List<Long?>?): MutableList<ProductProperties>? {
+    override fun findAllByIds(propertiesIds: List<Long?>?): MutableList<ProductProperties>? {
         return propertiesIds?.let { productPropertiesRepository.findAllById(it) }
     }
 

@@ -28,16 +28,15 @@ data class Product(
     @Column(name = "PRICE", nullable = false)
     var price: Long? = null,
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = [CascadeType.ALL])
-    @JoinColumn(name = "PROPERTIES")
+    @OneToMany(mappedBy = "product",fetch = FetchType.EAGER, cascade = [CascadeType.ALL])
     var properties: List<ProductProperties> = mutableListOf(),
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
-    @JoinColumn(name = "SHOP", nullable = false)
+    @JoinColumn(name = "SHOP_ID", nullable = false)
     var shop: Shop? = null,
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
-    @JoinColumn(name = "CATEGORY", nullable = false)
+    @JoinColumn(name = "CATEGORY_ID", nullable = false)
     var category: Category? = null,
 
     @OneToMany(mappedBy = "product", fetch = FetchType.EAGER, cascade = [CascadeType.ALL])

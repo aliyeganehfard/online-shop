@@ -18,7 +18,15 @@ class ProductPropertiesController @Autowired constructor(
     val mapper = BaseModelMapper()
 
     @PostMapping("save")
-    fun save(@RequestBody req: List<ProductPropertiesDto>): ResponseEntity<String> {
+    fun save(@RequestBody req: ProductPropertiesDto): ResponseEntity<String> {
+        val properties = mapper.toModel(req, ProductProperties::class.java)
+        productPropertiesService.save(properties)
+        return ResponseEntity("ok", HttpStatus.CREATED)
+    }
+
+    //Todo get productId | shopId
+    @PostMapping("saveAll")
+    fun saveAll(@RequestBody req: List<ProductPropertiesDto>): ResponseEntity<String> {
         val productProperties = mapper.toModelList(req, ProductProperties::class.java)
         productPropertiesService.saveAll(productProperties)
         return ResponseEntity("ok", HttpStatus.CREATED)
