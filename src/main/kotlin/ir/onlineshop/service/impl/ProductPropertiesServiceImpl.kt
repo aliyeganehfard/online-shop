@@ -28,6 +28,10 @@ class ProductPropertiesServiceImpl @Autowired constructor(
         productPropertiesRepository.saveAll(productProperties)
     }
 
+    override fun findById(propertiesId: Long): ProductProperties {
+        return productPropertiesRepository.findById(propertiesId).orElseThrow{ (throw Exception(propertiesId.toString())) }
+    }
+
     override fun findAllByIds(propertiesIds: List<Long?>?): MutableList<ProductProperties>? {
         return propertiesIds?.let { productPropertiesRepository.findAllById(it) }
     }

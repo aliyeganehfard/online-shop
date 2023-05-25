@@ -8,6 +8,8 @@ interface ProductPropertiesService {
 
     fun saveAll(productProperties: List<ProductProperties>)
 
+    fun findById(propertiesId: Long): ProductProperties
+
     fun findAllByIds(propertiesIds: List<Long?>?): MutableList<ProductProperties>?
 
     fun findShopProperties(shopId: Long): List<ProductProperties>
