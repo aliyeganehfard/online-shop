@@ -1,6 +1,7 @@
 package ir.onlineshop.service.impl
 
 import ir.onlineshop.common.dto.category.CategoryAddHolderDto
+import ir.onlineshop.common.exception.OnlineShopException
 import ir.onlineshop.database.model.Category
 import ir.onlineshop.database.repository.CategoryRepository
 import ir.onlineshop.database.repository.projections.MainCategory
@@ -41,7 +42,7 @@ class CategoryServiceImpl @Autowired constructor(
     override fun findMainCategoryById(categoryId: Long): Category {
         categoryRepository.findMainCategoryById(categoryId).let {
             if (it == null)
-                throw Exception("main category with id = $categoryId not found! ")
+                throw OnlineShopException("main category with id = $categoryId not found! ")
             else
                 return it
         }

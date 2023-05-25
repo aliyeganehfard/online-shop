@@ -1,5 +1,6 @@
 package ir.onlineshop.service.impl
 
+import ir.onlineshop.common.exception.OnlineShopException
 import ir.onlineshop.database.model.Shop
 import ir.onlineshop.database.model.enums.ShopStatus
 import ir.onlineshop.database.repository.ShopRepository
@@ -40,7 +41,8 @@ class ShopServiceImpl @Autowired constructor(
     }
 
     override fun findById(id: Long): Shop {
-        return shopRepository.findById(id).orElseThrow { (Exception(id.toString())) }
+        return shopRepository.findById(id)
+            .orElseThrow { (OnlineShopException("show with id $id not found!")) }
     }
 
     override fun existById(id: Long): Boolean {

@@ -1,5 +1,6 @@
 package ir.onlineshop.service.impl
 
+import ir.onlineshop.common.exception.OnlineShopException
 import ir.onlineshop.database.model.Category
 import ir.onlineshop.database.model.Product
 import ir.onlineshop.database.model.ProductProperties
@@ -44,7 +45,8 @@ class ProductServiceImpl @Autowired constructor(
     }
 
     override fun findById(productId: Long): Product {
-        return productRepository.findById(productId).orElseThrow{ (throw Exception(productId.toString())) }
+        return productRepository.findById(productId)
+            .orElseThrow{ (throw OnlineShopException("product with id $productId not found!")) }
     }
 
     private fun findProductPropertiesByIds(product: Product): MutableList<ProductProperties>? {
@@ -61,7 +63,7 @@ class ProductServiceImpl @Autowired constructor(
     private fun validateShopStatus(shop: Shop) {
         val shopStatus = shopProfileService.findStatusByShopId(shop.id!!)
         if (shopStatus == ShopStatus.AWAITING_CONFIRMATION)
-            throw Exception()
+            throw OnlineShopException("shop with id = $shop.id not allowed!")
     }
 
     private fun findShopById(product: Product): Shop {

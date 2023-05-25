@@ -1,5 +1,6 @@
 package ir.onlineshop.service.impl
 
+import ir.onlineshop.common.exception.OnlineShopException
 import ir.onlineshop.database.model.ProductProperties
 import ir.onlineshop.database.repository.ProductPropertiesRepository
 import ir.onlineshop.service.ProductPropertiesService
@@ -38,14 +39,14 @@ class ProductPropertiesServiceImpl @Autowired constructor(
     override fun deleteById(propertiesId: Long) {
         existByPropertiesId(propertiesId).let {
             if (!it)
-                throw Exception("properties id $propertiesId not found")
+                throw OnlineShopException("properties with id $propertiesId not found!")
         }
         productPropertiesRepository.deleteById(propertiesId)
     }
 
     override fun findById(propertiesId: Long): ProductProperties {
         return productPropertiesRepository.findById(propertiesId)
-            .orElseThrow { (throw Exception(propertiesId.toString())) }
+            .orElseThrow { (throw OnlineShopException("product properties with id $propertiesId not found!")) }
     }
 
     override fun findAllByIds(propertiesIds: List<Long?>?): MutableList<ProductProperties>? {
