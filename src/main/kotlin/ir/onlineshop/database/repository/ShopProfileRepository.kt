@@ -2,7 +2,6 @@ package ir.onlineshop.database.repository
 
 import ir.onlineshop.database.model.ShopProfile
 import ir.onlineshop.database.model.enums.ShopStatus
-import ir.onlineshop.database.repository.projections.ShopStatusProjections
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Query
 import org.springframework.data.repository.query.Param

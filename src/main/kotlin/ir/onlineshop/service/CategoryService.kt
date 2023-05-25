@@ -2,6 +2,7 @@ package ir.onlineshop.service
 
 import ir.onlineshop.common.dto.category.CategoryAddHolderDto
 import ir.onlineshop.database.model.Category
+import ir.onlineshop.database.repository.projections.MainCategory
 
 interface CategoryService {
 
@@ -12,4 +13,6 @@ interface CategoryService {
     fun findAll(): List<Category>
 
     fun findById(categoryId: Long): Category
+
+    fun findMainCategory(): List<MainCategory>
 }

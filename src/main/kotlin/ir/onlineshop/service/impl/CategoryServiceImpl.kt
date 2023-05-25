@@ -3,6 +3,7 @@ package ir.onlineshop.service.impl
 import ir.onlineshop.common.dto.category.CategoryAddHolderDto
 import ir.onlineshop.database.model.Category
 import ir.onlineshop.database.repository.CategoryRepository
+import ir.onlineshop.database.repository.projections.MainCategory
 import ir.onlineshop.service.CategoryService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -31,6 +32,10 @@ class CategoryServiceImpl @Autowired constructor(
 
     override fun findById(categoryId: Long): Category {
         return categoryRepository.findById(categoryId).orElseThrow { (Exception(categoryId.toString())) }
+    }
+
+    override fun findMainCategory(): List<MainCategory> {
+        return categoryRepository.findMainCategory()
     }
 
 }

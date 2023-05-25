@@ -3,6 +3,7 @@ package ir.onlineshop.controller
 import ir.onlineshop.common.dto.category.CategoryAddHolderDto
 import ir.onlineshop.common.dto.category.CategoryReqDto
 import ir.onlineshop.common.dto.category.CategoryResDto
+import ir.onlineshop.common.dto.category.MainCategoryDto
 import ir.onlineshop.common.dto.mapper.BaseModelMapper
 import ir.onlineshop.database.model.Category
 import ir.onlineshop.service.CategoryService
@@ -27,9 +28,9 @@ class CategoryController @Autowired constructor(
     }
 
     @PostMapping("add/subCategory")
-    fun addCategory(@RequestBody req: CategoryAddHolderDto): ResponseEntity<String>{
+    fun addCategory(@RequestBody req: CategoryAddHolderDto): ResponseEntity<String> {
         categoryService.addCategory(req)
-        return ResponseEntity("ok",HttpStatus.CREATED)
+        return ResponseEntity("ok", HttpStatus.CREATED)
     }
 
     @GetMapping("findAll")
@@ -40,9 +41,16 @@ class CategoryController @Autowired constructor(
     }
 
     @GetMapping("findById/{categoryId}")
-    fun findById(@PathVariable(name = "categoryId") categoryId: Long): ResponseEntity<CategoryResDto>{
+    fun findById(@PathVariable(name = "categoryId") categoryId: Long): ResponseEntity<CategoryResDto> {
         val category = categoryService.findById(categoryId)
-        val categoryDto = mapper.toDto(category,CategoryResDto::class.java)
-        return ResponseEntity(categoryDto,HttpStatus.OK)
+        val categoryDto = mapper.toDto(category, CategoryResDto::class.java)
+        return ResponseEntity(categoryDto, HttpStatus.OK)
+    }
+
+    @GetMapping("findMainCategory")
+    fun findMainCategory(): ResponseEntity<List<MainCategoryDto>> {
+        val mainCategory = categoryService.findMainCategory()
+        val mainCategoryDto = mapper.toDtoList(mainCategory, MainCategoryDto::class.java)
+        return ResponseEntity(mainCategoryDto, HttpStatus.OK)
     }
 }
