@@ -33,6 +33,13 @@ class ProductPropertiesController @Autowired constructor(
         return ResponseEntity("ok", HttpStatus.CREATED)
     }
 
+    @PutMapping("update")
+    fun update(@RequestParam("propertiesId") propertiesId: Long,
+               @RequestParam("value") value: String): ResponseEntity<String>{
+        productPropertiesService.update(propertiesId, value)
+        return ResponseEntity("ok",HttpStatus.CREATED)
+    }
+
     @GetMapping("findById/{propertiesId}")
     fun findById(@PathVariable(value = "propertiesId") propertiesId: Long): ResponseEntity<ProductPropertiesResDto> {
         val properties = productPropertiesService.findById(propertiesId)

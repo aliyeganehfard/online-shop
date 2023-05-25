@@ -28,6 +28,13 @@ class ProductPropertiesServiceImpl @Autowired constructor(
         productPropertiesRepository.saveAll(productProperties)
     }
 
+    @Transactional
+    override fun update(propertiesId: Long, value: String) {
+        val properties = findById(propertiesId)
+        properties.value = value
+        productPropertiesRepository.save(properties)
+    }
+
     override fun findById(propertiesId: Long): ProductProperties {
         return productPropertiesRepository.findById(propertiesId).orElseThrow{ (throw Exception(propertiesId.toString())) }
     }
