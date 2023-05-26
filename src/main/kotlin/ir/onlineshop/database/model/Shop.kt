@@ -39,8 +39,9 @@ data class Shop(
     @JoinColumn(name = "CATEGORY", nullable = false)
     var category: Category? = null,
 
-    @OneToOne(mappedBy = "shop",fetch = FetchType.LAZY)
-    var shopOwner: ShopOwner? = null
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "SHOP_OWNER", nullable = false)
+    var shopOwner: User? = null
 ) {
 
     @PrePersist

@@ -1,8 +1,8 @@
 package ir.onlineshop.database.repository
 
-import ir.onlineshop.database.model.ShopOwner
+import ir.onlineshop.database.model.User
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 
 @Repository
-interface ShopOwnerRepository: JpaRepository<ShopOwner,Long>
+interface UserRepository: JpaRepository<User,Long>
