@@ -36,8 +36,11 @@ data class Shop(
     var address: String? = null,
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category", nullable = false)
-    var category: Category? = null
+    @JoinColumn(name = "CATEGORY", nullable = false)
+    var category: Category? = null,
+
+    @OneToOne(mappedBy = "shop",fetch = FetchType.LAZY)
+    var shopOwner: ShopOwner? = null
 ) {
 
     @PrePersist

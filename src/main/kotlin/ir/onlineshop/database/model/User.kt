@@ -5,43 +5,41 @@ import jakarta.persistence.*
 import org.hibernate.Hibernate
 import java.time.LocalDateTime
 
-@Entity
-@Table(name = "USERS")
-data class User(
+@MappedSuperclass
+open class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Long? = null,
+    private var id: Long? = null
 
     @Column(name = "CREATE_DATE")
-    var createDate: LocalDateTime? = null,
+    var createDate: LocalDateTime? = null
 
     @Column(name = "UPDATE_DATE")
-    var updateDate: LocalDateTime? = null,
+    var updateDate: LocalDateTime? = null
 
     @Column(name = "USER_NAME", nullable = false)
-    var username: String? = null,
+    var username: String? = null
 
     @Column(name = "PASSWORD", nullable = false)
-    var password: String? = null,
+    var password: String? = null
 
     @Column(name = "FIRST_NAME")
-    var firstname: String? = null,
+    var firstname: String? = null
 
     @Column(name = "LAST_NAME")
-    var lastname: String? = null,
+    var lastname: String? = null
 
     @Column(name = "PHONE_NUMBER")
-    var phoneNumber: String? = null,
+    var phoneNumber: String? = null
 
     @Column(name = "EMAIL")
-    var email: String? = null,
+    var email: String? = null
 
     @Enumerated(EnumType.STRING)
     @Column(name = "ROLE", nullable = false)
     var role: UserRole? = null
 
-){
     @PrePersist
     fun setCreateDate() {
         val now = LocalDateTime.now()
@@ -68,4 +66,6 @@ data class User(
     override fun toString(): String {
         return this::class.simpleName + "(id = $id , createDate = $createDate , updateDate = $updateDate , username = $username , password = $password , firstname = $firstname , lastname = $lastname , phoneNumber = $phoneNumber , email = $email , role = $role )"
     }
+
+
 }
