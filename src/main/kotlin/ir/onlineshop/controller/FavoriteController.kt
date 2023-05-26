@@ -31,4 +31,10 @@ class FavoriteController @Autowired constructor(
         val favoritesDto = mapper.toDtoList(favorites,FavoriteResDto::class.java)
         return ResponseEntity(favoritesDto,HttpStatus.OK)
     }
+
+    @DeleteMapping("deleteById/{favoriteId}")
+    fun deleteById(@PathVariable(value = "favoriteId") favoriteId: Long): ResponseEntity<String>{
+        favoriteService.deleteById(favoriteId)
+        return ResponseEntity("ok",HttpStatus.OK)
+    }
 }

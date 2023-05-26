@@ -32,9 +32,21 @@ class FavoriteServiceImpl @Autowired constructor(
     override fun findUserFavorites(userId: Long): List<UserFavorites> {
         userService.existById(userId).let {
             if (!it)
-                throw OnlineShopException("user with id $userId not found")
+                throw OnlineShopException("user with id $userId not found!")
             return favoriteRepository.findAllByUserId(userId)
         }
+    }
+
+    override fun deleteById(favoriteId: Long) {
+        existById(favoriteId).let {
+            if (!it)
+                throw OnlineShopException("favorite with id $favoriteId not found!")
+            favoriteRepository.deleteById(favoriteId)
+        }
+    }
+
+    private fun existById(favoriteId: Long): Boolean {
+        return favoriteRepository.existsById(favoriteId)
     }
 
 }

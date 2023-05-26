@@ -7,4 +7,6 @@ interface FavoriteService {
     fun save(userId: Long, productId: Long)
 
     fun findUserFavorites(userId: Long): List<UserFavorites>
+
+    fun deleteById(favoriteId: Long)
 }
