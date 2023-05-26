@@ -1,7 +1,9 @@
 package ir.onlineshop.service.impl
 
+import ir.onlineshop.common.exception.OnlineShopException
 import ir.onlineshop.database.model.Favorite
 import ir.onlineshop.database.repository.FavoriteRepository
+import ir.onlineshop.database.repository.projections.UserFavorites
 import ir.onlineshop.service.FavoriteService
 import ir.onlineshop.service.ProductService
 import ir.onlineshop.service.UserService
@@ -13,7 +15,7 @@ class FavoriteServiceImpl @Autowired constructor(
     private val favoriteRepository: FavoriteRepository,
     private val userService: UserService,
     private val productService: ProductService
-): FavoriteService {
+) : FavoriteService {
 
     override fun save(userId: Long, productId: Long) {
         val user = userService.findById(userId)
@@ -25,6 +27,14 @@ class FavoriteServiceImpl @Autowired constructor(
         }
 
         favoriteRepository.save(favorite)
+    }
+
+    override fun findUserFavorites(userId: Long): List<UserFavorites> {
+        userService.existById(userId).let {
+            if (!it)
+                throw OnlineShopException("user with id $userId not found")
+            return favoriteRepository.findAllByUserId(userId)
+        }
     }
 
 }

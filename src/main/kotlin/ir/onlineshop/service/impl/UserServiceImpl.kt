@@ -29,4 +29,8 @@ class UserServiceImpl @Autowired constructor(
         }
     }
 
+    override fun existById(userId: Long): Boolean {
+        return userRepository.existsById(userId)
+    }
+
 }
