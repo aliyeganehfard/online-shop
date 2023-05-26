@@ -22,7 +22,6 @@ data class Category(
     @OneToMany(mappedBy = "parentCategory", cascade = [CascadeType.ALL], orphanRemoval = true)
     var childCategories: MutableList<Category> = mutableListOf()
 
-
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

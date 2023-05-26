@@ -1,9 +1,9 @@
 spring:
   datasource:
-    url: jdbc:h2:mem:mydb
-    username: sa
-    password:
-    driverClassName: org.h2.Driver
+    url: jdbc:postgresql://localhost:5432/online-shop
+    username: postgres
+    password: ali.1381
+    driverClassName: org.postgresql.Driver
   h2:
     console.enabled: true
   jpa:
