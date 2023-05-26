@@ -7,6 +7,7 @@ import ir.onlineshop.database.repository.ShopRepository
 import ir.onlineshop.service.CategoryService
 import ir.onlineshop.service.ShopProfileService
 import ir.onlineshop.service.ShopService
+import ir.onlineshop.service.UserService
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
@@ -17,7 +18,8 @@ import org.springframework.transaction.annotation.Transactional
 class ShopServiceImpl @Autowired constructor(
     private val shopRepository: ShopRepository,
     private val shopProfileService: ShopProfileService,
-    private val categoryService: CategoryService
+    private val categoryService: CategoryService,
+    private val userService: UserService
 ) : ShopService {
 
     private val log: Logger = LoggerFactory.getLogger(ShopServiceImpl::class.java.name)
@@ -25,7 +27,10 @@ class ShopServiceImpl @Autowired constructor(
     @Transactional
     override fun save(shop: Shop): Shop {
         val category = categoryService.findMainCategoryById(shop.category?.id!!)
+        val shopOwner = userService.findShopOwnerById(shop.shopOwner?.id!!)
+
         shop.category = category
+        shop.shopOwner = shopOwner
 
         val savedShop = shopRepository.save(shop)
         saveShopStatus(savedShop)

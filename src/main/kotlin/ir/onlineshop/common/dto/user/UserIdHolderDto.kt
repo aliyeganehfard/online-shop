@@ -1,5 +1,5 @@
 package ir.onlineshop.common.dto.user
 
-enum class UserIdHolderDto(
+data class UserIdHolderDto(
     var id: Long? = null
 )

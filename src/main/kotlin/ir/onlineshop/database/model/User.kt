@@ -7,7 +7,7 @@ import java.time.LocalDateTime
 
 @Entity
 @Table(name = "USERS")
-class User(
+class User (
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,7 +40,7 @@ class User(
     @Enumerated(EnumType.STRING)
     @Column(name = "ROLE", nullable = false)
     var role: UserRole? = null,
-) {
+){
     @PrePersist
     fun setCreateDate() {
         val now = LocalDateTime.now()
