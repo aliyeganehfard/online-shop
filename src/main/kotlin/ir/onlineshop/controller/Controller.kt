@@ -10,4 +10,9 @@ class Controller {
     fun hello(): String {
         return "hello world!"
     }
+
+    @GetMapping("hello/permitAll")
+    fun helloPermitAll(): String {
+        return "permitAll. hello world!"
+    }
 }

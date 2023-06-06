@@ -10,7 +10,7 @@
     </parent>
     <groupId>ir</groupId>
     <artifactId>online-shop</artifactId>
-    <version>1.14.0</version>
+    <version>1.15.0</version>
     <name>online-shop</name>
     <description>Demo project for Spring Boot</description>
     <properties>
@@ -25,6 +25,10 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.module</groupId>
