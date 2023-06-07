@@ -3,44 +3,46 @@ package ir.onlineshop.database.model
 import ir.onlineshop.database.model.enums.UserRole
 import jakarta.persistence.*
 import org.hibernate.Hibernate
+import org.springframework.security.core.GrantedAuthority
+import org.springframework.security.core.authority.SimpleGrantedAuthority
+import org.springframework.security.core.userdetails.UserDetails
 import java.time.LocalDateTime
 
 @Entity
 @Table(name = "USERS")
-class User (
-
+class User: UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Long? = null,
+    var id: Long? = null
 
     @Column(name = "CREATE_DATE")
-    var createDate: LocalDateTime? = null,
+    var createDate: LocalDateTime? = null
 
     @Column(name = "UPDATE_DATE")
-    var updateDate: LocalDateTime? = null,
+    var updateDate: LocalDateTime? = null
 
     @Column(name = "USER_NAME", nullable = false)
-    var username: String? = null,
+    private var username: String = ""
 
     @Column(name = "PASSWORD", nullable = false)
-    var password: String? = null,
+    private var password: String = ""
 
     @Column(name = "FIRST_NAME")
-    var firstname: String? = null,
+    var firstname: String? = null
 
     @Column(name = "LAST_NAME")
-    var lastname: String? = null,
+    var lastname: String? = null
 
     @Column(name = "PHONE_NUMBER")
-    var phoneNumber: String? = null,
+    var phoneNumber: String? = null
 
     @Column(name = "EMAIL")
-    var email: String? = null,
+    var email: String? = null
 
     @Enumerated(EnumType.STRING)
     @Column(name = "ROLE", nullable = false)
-    var role: UserRole? = null,
-){
+    var role: UserRole? = null
+
     @PrePersist
     fun setCreateDate() {
         val now = LocalDateTime.now()
@@ -68,5 +70,39 @@ class User (
         return this::class.simpleName + "(id = $id , createDate = $createDate , updateDate = $updateDate , username = $username , password = $password , firstname = $firstname , lastname = $lastname , phoneNumber = $phoneNumber , email = $email , role = $role )"
     }
 
+    override fun getAuthorities(): MutableCollection<out GrantedAuthority> {
+        return mutableListOf(SimpleGrantedAuthority(role!!.name))
+    }
 
+    override fun getPassword(): String {
+        return this.username
+    }
+
+    override fun getUsername(): String {
+        return this.password
+    }
+
+    override fun isAccountNonExpired(): Boolean {
+        return true
+    }
+
+    override fun isAccountNonLocked(): Boolean {
+       return true
+    }
+
+    override fun isCredentialsNonExpired(): Boolean {
+        return true
+    }
+
+    override fun isEnabled(): Boolean {
+        return true
+    }
+
+    fun setUsername(username: String){
+        this.username = username
+    }
+
+    fun setPassword(password: String){
+        this.password = password
+    }
 }
