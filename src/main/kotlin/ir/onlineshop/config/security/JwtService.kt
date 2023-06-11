@@ -3,15 +3,12 @@ package ir.onlineshop.config.security
 import io.jsonwebtoken.Claims
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.SignatureAlgorithm
-import io.jsonwebtoken.io.Decoders
 import io.jsonwebtoken.security.Keys
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.stereotype.Service
 import java.security.Key
-import java.security.SecureRandom
 import java.util.*
 import java.util.function.Function
-import javax.crypto.KeyGenerator
 
 @Service
 class JwtService {
