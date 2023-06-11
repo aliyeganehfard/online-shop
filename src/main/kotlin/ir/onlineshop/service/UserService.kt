@@ -1,10 +1,16 @@
 package ir.onlineshop.service
 
+import ir.onlineshop.common.dto.auth.AuthenticationResponse
+import ir.onlineshop.common.dto.auth.SignInDto
 import ir.onlineshop.database.model.User
 
 interface UserService {
 
-    fun save(user: User)
+    fun signUp(user: User): AuthenticationResponse
+
+    fun signIn(signInDto: SignInDto): AuthenticationResponse
+
+    fun findByUsername(username: String): User
 
     fun findById(userId: Long): User
 

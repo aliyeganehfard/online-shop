@@ -19,13 +19,6 @@ class UserController @Autowired constructor(
 
     private val mapper = BaseModelMapper()
 
-    @PostMapping("save")
-    fun save(@RequestBody req: UserReqDto): ResponseEntity<String> {
-        val user = mapper.toModel(req, User::class.java)
-        userService.save(user)
-        return ResponseEntity("ok", HttpStatus.CREATED)
-    }
-
     @GetMapping("findAll")
     fun findAll():List<User>{
         return userRepository.findAll()
