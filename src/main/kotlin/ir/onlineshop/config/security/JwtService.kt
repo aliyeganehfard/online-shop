@@ -13,12 +13,11 @@ import java.util.*
 import java.util.function.Function
 import javax.crypto.KeyGenerator
 
-
 @Service
 class JwtService {
 
     companion object {
-        const val SECRET_KEY = "IUAtfsrQw582dMR1JRX86q8dgkAu5jqTFzowW+Ydnn0="
+        const val SECRET_KEY = "5/3Wa3ItrK8rBJpZr2YKxvMgAajJXkIWNgh4prD5sQo="
     }
 
     fun extractUsername(token: String): String {
@@ -37,7 +36,7 @@ class JwtService {
             .setSubject(userDetails.username)
             .setIssuedAt(Date(System.currentTimeMillis()))
             .setExpiration(Date(System.currentTimeMillis() + 1000 * 24 * 60))
-            .signWith(getSignInKey(), SignatureAlgorithm.ES256)
+            .signWith(getSignInKey(), SignatureAlgorithm.HS256)
             .compact()
     }
 
@@ -68,17 +67,7 @@ class JwtService {
     }
 
     private fun getSignInKey(): Key {
-        val keyBytes = Decoders.BASE64.decode(SECRET_KEY)
-//        val keyBytes = Base64.getDecoder().decode(generateSecretKey())
+        val keyBytes = Base64.getDecoder().decode(SECRET_KEY)
         return Keys.hmacShaKeyFor(keyBytes)
-    }
-
-    private fun generateSecretKey(): String {
-        val keyGenerator = KeyGenerator.getInstance("ECB")
-        val secureRandom = SecureRandom()
-        keyGenerator.init(256, secureRandom)
-        val secretKey = keyGenerator.generateKey()
-        val keyBytes = secretKey.encoded
-        return Base64.getEncoder().encodeToString(keyBytes)
     }
 }

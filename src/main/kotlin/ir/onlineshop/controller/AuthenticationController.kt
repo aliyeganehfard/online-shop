@@ -1,5 +1,6 @@
 package ir.onlineshop.controller
 
+import ir.onlineshop.common.dto.auth.AuthenticationResponse
 import ir.onlineshop.common.dto.auth.SignInDto
 import ir.onlineshop.common.dto.auth.SignUpDto
 import ir.onlineshop.common.dto.mapper.BaseModelMapper
@@ -9,10 +10,7 @@ import ir.onlineshop.service.UserService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("auth/")
@@ -22,16 +20,21 @@ class AuthenticationController @Autowired constructor(
 
     val mapper= BaseModelMapper()
 
+    @GetMapping("hello")
+    fun hello(): String {
+        return "hello world!"
+    }
+
     @PostMapping("signUp")
-    fun signUp(@RequestBody req: SignUpDto): ResponseEntity<String> {
+    fun signUp(@RequestBody req: SignUpDto): ResponseEntity<AuthenticationResponse> {
         val user = mapper.toModel(req, User::class.java)
-        userService.signUp(user)
-        return ResponseEntity("ok", HttpStatus.CREATED)
+        val response = userService.signUp(user)
+        return ResponseEntity(response, HttpStatus.CREATED)
     }
 
     @PostMapping("singIn")
-    fun signIn(@RequestBody req: SignInDto): ResponseEntity<String> {
-        userService.signIn(req)
-        return ResponseEntity("ok", HttpStatus.CREATED)
+    fun signIn(@RequestBody req: SignInDto): ResponseEntity<AuthenticationResponse> {
+        val response = userService.signIn(req)
+        return ResponseEntity(response, HttpStatus.CREATED)
     }
 }

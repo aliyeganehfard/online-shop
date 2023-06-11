@@ -75,11 +75,11 @@ class User: UserDetails {
     }
 
     override fun getPassword(): String {
-        return this.username
+        return this.password
     }
 
     override fun getUsername(): String {
-        return this.password
+        return this.username
     }
 
     override fun isAccountNonExpired(): Boolean {
