@@ -7,41 +7,47 @@ import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
 import java.time.LocalDateTime
+import kotlin.jvm.Transient
 
 @Entity
 @Table(name = "USERS")
-class User: UserDetails {
+class User(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Long? = null
+    var id: Long? = null,
 
     @Column(name = "CREATE_DATE")
-    var createDate: LocalDateTime? = null
+    var createDate: LocalDateTime? = null,
 
     @Column(name = "UPDATE_DATE")
-    var updateDate: LocalDateTime? = null
+    var updateDate: LocalDateTime? = null,
 
     @Column(name = "USER_NAME", nullable = false)
-    private var username: String = ""
+    private var username: String = "",
 
     @Column(name = "PASSWORD", nullable = false)
-    private var password: String = ""
+    private var password: String = "",
 
     @Column(name = "FIRST_NAME")
-    var firstname: String? = null
+    var firstname: String? = null,
 
     @Column(name = "LAST_NAME")
-    var lastname: String? = null
+    var lastname: String? = null,
 
     @Column(name = "PHONE_NUMBER")
-    var phoneNumber: String? = null
+    var phoneNumber: String? = null,
 
     @Column(name = "EMAIL")
-    var email: String? = null
+    var email: String? = null,
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "ROLE", nullable = false)
-    var role: UserRole? = null
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "ROLE")
+    var role: Role? = null,
+
+) : UserDetails {
+
+    @Transient
+    var authorities: List<Authority> = listOf()
 
     @PrePersist
     fun setCreateDate() {
@@ -87,7 +93,7 @@ class User: UserDetails {
     }
 
     override fun isAccountNonLocked(): Boolean {
-       return true
+        return true
     }
 
     override fun isCredentialsNonExpired(): Boolean {
@@ -98,11 +104,11 @@ class User: UserDetails {
         return true
     }
 
-    fun setUsername(username: String){
+    fun setUsername(username: String) {
         this.username = username
     }
 
-    fun setPassword(password: String){
+    fun setPassword(password: String) {
         this.password = password
     }
 }

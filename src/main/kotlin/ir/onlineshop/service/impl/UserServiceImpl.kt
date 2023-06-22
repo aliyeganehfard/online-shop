@@ -53,8 +53,9 @@ class UserServiceImpl @Autowired constructor(
     }
 
     override fun findShopOwnerById(userId: Long): User {
+        // todo
         findById(userId).let {
-            if (it.role!! != UserRole.SHOP_OWNER)
+            if (it.role!!.name != "SELLER")
                 throw OnlineShopException("user with id = $userId dont have SHOP_OWNER permission")
             return it
         }
